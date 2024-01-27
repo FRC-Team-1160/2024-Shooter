@@ -15,20 +15,13 @@ public final class Constants {
 
   public static final class PortConstants {
     // CAN ID 
-    public static final int FRONT_LEFT_ROTATION_DRIVE = 1;
-    public static final int FRONT_RIGHT_ROTATION_DRIVE = 3;
-    public static final int BACK_LEFT_ROTATION_DRIVE = 5;
-    public static final int BACK_RIGHT_ROTATION_DRIVE = 7;
 
-    public static final int FRONT_LEFT_DIRECTION_DRIVE = 2;
-    public static final int FRONT_RIGHT_DIRECTION_DRIVE = 4;
-    public static final int BACK_LEFT_DIRECTION_DRIVE = 6;
-    public static final int BACK_RIGHT_DIRECTION_DRIVE = 8;
-
-    public static final int FRONT_LEFT_CODER_DRIVE = 1;
-    public static final int FRONT_RIGHT_CODER_DRIVE = 3;
-    public static final int BACK_LEFT_CODER_DRIVE = 5;
-    public static final int BACK_RIGHT_CODER_DRIVE = 7;
+    public static final int BACK_LEFT = 1;
+    public static final int FRONT_LEFT = 2;
+    public static final int MID_LEFT = 3;
+    public static final int FRONT_RIGHT = 4;
+    public static final int MID_RIGHT = 5;
+    public static final int BACK_RIGHT = 6;
 
     public static final int GATE = 0;
   }

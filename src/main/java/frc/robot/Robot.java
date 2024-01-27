@@ -90,13 +90,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     var shooter = m_robotContainer.m_shooter;
-    shooter.changeSpeed(m_robotContainer.m_mainStick);
-    SmartDashboard.putNumber("f_rpm (WIP)", shooter.forwardMotor.getEncoder().getVelocity());
-    SmartDashboard.putNumber("r_rpm (WIP)", shooter.reverseMotor.getEncoder().getVelocity());
-    System.out.println(shooter.forwardMotor.getEncoder().getVelocity());
-    System.out.println("pos" + shooter.forwardMotor.getEncoder().getPosition());
-    shooter.temp_f_speed = SmartDashboard.getNumber("temp_f_speed", shooter.temp_f_speed);
-    shooter.temp_r_speed = SmartDashboard.getNumber("temp_r_speed", shooter.temp_r_speed);
+    SmartDashboard.putNumber("b_rpm (WIP)", shooter.forwardMotor.getEncoder().getVelocity());
+    SmartDashboard.putNumber("t_rpm (WIP)", shooter.reverseMotor.getEncoder().getVelocity());
+    shooter.temp_f_speed = SmartDashboard.getNumber("temp_b_speed", shooter.temp_f_speed)/100d;
+    shooter.temp_r_speed = SmartDashboard.getNumber("temp_t_speed", shooter.temp_r_speed)/100d;
 
   }
 

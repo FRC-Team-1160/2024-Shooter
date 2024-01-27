@@ -35,12 +35,11 @@ public class SetSpeed extends Command {
       m_shooter.f_speed = speed;
       m_shooter.r_speed = speed;
     }
-    SmartDashboard.putNumber("temp_f_speed", m_shooter.temp_f_speed);
-    SmartDashboard.putNumber("temp_r_speed", m_shooter.temp_r_speed);
-    SmartDashboard.putNumber("f_speed", m_shooter.f_speed);
-    SmartDashboard.putNumber("r_speed", m_shooter.r_speed);
+    SmartDashboard.putNumber("temp_b_speed", m_shooter.temp_f_speed*100);
+    SmartDashboard.putNumber("temp_t_speed", m_shooter.temp_r_speed*100);
+    SmartDashboard.putNumber("b_speed", m_shooter.f_speed*100);
+    SmartDashboard.putNumber("t_speed", m_shooter.r_speed*100);
 
-    System.out.println("Speed set to " + speed);
     m_shooter.forwardMotor.set(m_shooter.f_speed);
     m_shooter.reverseMotor.set(-m_shooter.r_speed); //INVERT
   }

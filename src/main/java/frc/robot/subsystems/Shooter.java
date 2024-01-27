@@ -26,7 +26,6 @@ public class Shooter extends SubsystemBase{
     public Timer m_timer;
 
     public static Shooter getInstance(){
-        System.out.println("shooterinstancs");
         if (m_instance == null){
           m_instance = new Shooter();
         }
@@ -35,7 +34,7 @@ public class Shooter extends SubsystemBase{
 
 
     private Shooter(){
-        forwardMotor = new CANSparkMax(10, CANSparkLowLevel.MotorType.kBrushless); //BRUSHED (set to brushless for sim)
+        forwardMotor = new CANSparkMax(7, CANSparkLowLevel.MotorType.kBrushless); //BRUSHED (set to brushless for sim)
         //reverseMotor = new CANSparkMax(9, CANSparkLowLevel.MotorType.kBrushless); //BRUSHLESS FOR INTAKE, BRUSHED FOR SHOOTER
         reverseMotor = new CANSparkMax(8, CANSparkLowLevel.MotorType.kBrushless); //BRUSHED
         inverted = false;
@@ -48,7 +47,6 @@ public class Shooter extends SubsystemBase{
         m_timer = new Timer();
         m_timer.start();
         //m_compressor.disable();
-        System.out.println("shooter init");
         //
     }
 
@@ -66,8 +64,8 @@ public class Shooter extends SubsystemBase{
 
         }
 
-        SmartDashboard.putNumber("temp_f_speed", temp_f_speed);
-        SmartDashboard.putNumber("temp_r_speed", temp_r_speed);
+        SmartDashboard.putNumber("temp_b_speed", temp_f_speed*100);
+        SmartDashboard.putNumber("temp_t_speed", temp_r_speed*100);
       }
       
     }

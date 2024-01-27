@@ -12,7 +12,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.SetSpeed;
 import frc.robot.commands.Invert;
 import frc.robot.commands.LockSpeed;
-
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -39,6 +39,8 @@ public class RobotContainer {
 
     // The robot's subsystems
     public final Shooter m_shooter = Shooter.getInstance();
+    public final DriveTrain m_driveTrain = DriveTrain.getInstance();
+
   
     // Controllers
     public Joystick m_mainStick = new Joystick(OIConstants.mainStickPort);
@@ -53,6 +55,13 @@ public class RobotContainer {
 
   
       // Configure default commands
+      m_driveTrain.setDefaultCommand(new RunCommand(
+        () -> m_driveTrain.tankDrive(
+          m_mainStick.getRawAxis(1),
+          0.5*m_mainStick.getRawAxis(4),
+          0.675, m_mainStick.getRawButton(5)),
+        m_driveTrain)
+      );
 
     }
 

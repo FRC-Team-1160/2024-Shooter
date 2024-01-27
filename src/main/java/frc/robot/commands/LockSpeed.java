@@ -30,11 +30,10 @@ public class LockSpeed extends Command {
     m_shooter.f_speed = m_shooter.temp_f_speed;
     m_shooter.r_speed = m_shooter.temp_r_speed;
 
-    System.out.println("Speed set to " + m_shooter.temp_f_speed + " , " + m_shooter.temp_r_speed);
     m_shooter.forwardMotor.set(m_shooter.f_speed);
     m_shooter.reverseMotor.set(-m_shooter.r_speed); 
-    SmartDashboard.putNumber("f_speed", m_shooter.f_speed);
-    SmartDashboard.putNumber("r_speed", m_shooter.r_speed);
+    SmartDashboard.putNumber("b_speed", m_shooter.f_speed*100);
+    SmartDashboard.putNumber("t_speed", m_shooter.r_speed*100);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
