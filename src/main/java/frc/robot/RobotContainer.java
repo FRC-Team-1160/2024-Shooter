@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.SetSpeed;
+import frc.robot.commands.Angle;
 import frc.robot.commands.Invert;
 import frc.robot.commands.LockSpeed;
 import frc.robot.subsystems.DriveTrain;
@@ -98,6 +99,16 @@ public class RobotContainer {
       new JoystickButton(m_mainStick, 8)
         .onTrue(
           new Invert(m_shooter)
+        );
+
+      new JoystickButton(m_mainStick, 5)
+        .whileTrue(
+          new Angle(m_shooter, 0.1)
+        );
+
+      new JoystickButton(m_mainStick, 6)
+        .whileTrue(
+          new Angle(m_shooter, -0.1)
         );
 
     }

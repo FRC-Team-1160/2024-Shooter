@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel;
 
 import edu.wpi.first.hal.CANAPITypes.CANDeviceType;
-
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,6 +17,8 @@ public class Shooter extends SubsystemBase{
 
     public CANSparkMax forwardMotor;
     public CANSparkMax reverseMotor;
+    public CANSparkMax pitchMotor;
+    public PIDController pitchPID;
 
     public double f_speed;
     public double r_speed;
@@ -24,6 +26,8 @@ public class Shooter extends SubsystemBase{
     public double temp_r_speed;
     public boolean inverted;
     public Timer m_timer;
+
+    public double setpoint;
 
     public static Shooter getInstance(){
         if (m_instance == null){
@@ -34,9 +38,11 @@ public class Shooter extends SubsystemBase{
 
 
     private Shooter(){
-        forwardMotor = new CANSparkMax(7, CANSparkLowLevel.MotorType.kBrushless); //BRUSHED (set to brushless for sim)
-        //reverseMotor = new CANSparkMax(9, CANSparkLowLevel.MotorType.kBrushless); //BRUSHLESS FOR INTAKE, BRUSHED FOR SHOOTER
-        reverseMotor = new CANSparkMax(8, CANSparkLowLevel.MotorType.kBrushless); //BRUSHED
+        forwardMotor = new CANSparkMax(7, CANSparkLowLevel.MotorType.kBrushless);
+        reverseMotor = new CANSparkMax(8, CANSparkLowLevel.MotorType.kBrushless);
+        pitchMotor = new CANSparkMax(9, CANSparkLowLevel.MotorType.kBrushless);
+        pitchPID = new PIDController(0.001, 0, 0);
+
         inverted = false;
         forwardMotor.setInverted(inverted);
         reverseMotor.setInverted(inverted);
@@ -46,8 +52,13 @@ public class Shooter extends SubsystemBase{
         temp_r_speed = 0.0;
         m_timer = new Timer();
         m_timer.start();
+        setpoint = pitchMotor.getAlternateEncoder(8196).getPosition();
         //m_compressor.disable();
         //
+    }
+
+    public void moveAngle(double amount) {
+      setpoint += amount;
     }
 
     public void changeSpeed(Joystick stick){
@@ -68,5 +79,13 @@ public class Shooter extends SubsystemBase{
         SmartDashboard.putNumber("temp_t_speed", temp_r_speed*100);
       }
       
+    }
+
+    @Override
+    public void periodic() {
+      pitchMotor.set(-0.05*pitchPID.calculate(pitchMotor.getAlternateEncoder(8196).getPosition(), setpoint));
+      SmartDashboard.putNumber("pitchEncoder", pitchMotor.getAlternateEncoder(8196).getPosition());
+      SmartDashboard.putNumber("setpoint", setpoint);
+      SmartDashboard.putNumber("PID calc", pitchPID.calculate(pitchMotor.getAlternateEncoder(8197).getPosition(), setpoint));
     }
 }
